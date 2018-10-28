@@ -1,0 +1,22 @@
+{
+  "name": "hci_project",
+  "version": "1.0.0",
+  "description": "This is our HCI project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hreeves19/HCIProject.git"
+  },
+  "author": "Will, Liala, and Court",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hreeves19/HCIProject/issues"
+  },
+  "homepage": "https://github.com/hreeves19/HCIProject#readme",
+  "dependencies": {
+    "tesseract.js": "^1.0.10"
+  }
+}
