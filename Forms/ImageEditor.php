@@ -15,6 +15,11 @@
 </head>
 <title>Index</title>
 <body>
+<form action="../Scripts/ProcessImage.php" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submit">
+</form>
 
 <canvas id="canvasEdit" style="border:1px solid #000000;"></canvas>
 

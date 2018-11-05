@@ -18,6 +18,7 @@
 
 <input type='file' onchange="readURL(this);" />
 <img id="blah" src="" alt="your image" style="display: none;"/>
+
 <p>Your Image</p>
 <canvas style="border:1px solid #d3d3d3; height: 750px; width: 1000px;" id="imageCanvas"></canvas>
 
