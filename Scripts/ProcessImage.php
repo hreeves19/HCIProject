@@ -25,6 +25,8 @@ if(isset($_POST["submit"])) {
 // of the shell command in $retval.
         $last_line = system('python test.py ' . $_FILES["fileToUpload"]["name"], $retval);
 
+        // Check if image was created
+
 // Printing additional info
         echo '
 <hr />Last line of the output: ' . $last_line . '

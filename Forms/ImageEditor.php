@@ -15,6 +15,8 @@
 </head>
 <title>Index</title>
 <body>
+<h1 style="text-align: center;">Automated Map Cataloging</h1>
+<hr>
 <form action="../Scripts/ProcessImage.php" method="post" enctype="multipart/form-data">
     Select image to upload:
     <input type="file" name="fileToUpload" id="fileToUpload">
@@ -26,6 +28,7 @@
 </body>
 <script>
 
+    /*************************************************************/
     var canvas = document.getElementsByTagName('canvas')[0];
     canvas.width = 800;
     canvas.height = 600;

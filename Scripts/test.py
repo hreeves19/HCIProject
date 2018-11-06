@@ -8,6 +8,12 @@ def main():
     filename = str(sys.argv[1])
     filename = filename[:-4]
 
+    # Load an color image in grayscale
+    src = cv2.imread(filename_ext)
+    img = cv2.resize(src, (1000, 1000)) 
+    vis = src.copy()
+    new = ""
+
     # define the name of the directory to be created
     path = "C:/xampp/htdocs/Hci_Project/Scripts/Images/" + str(filename)
 
@@ -17,12 +23,6 @@ def main():
         print ("Creation of the directory %s failed" % path)
     else:  
         print ("Successfully created the directory %s " % path)
-
-    # Load an color image in grayscale
-    src = cv2.imread(filename_ext)
-    img = cv2.resize(src, (1000, 1000)) 
-    vis = src.copy()
-    new = ""
 
     channels = cv2.text.computeNMChannels(src)
 
