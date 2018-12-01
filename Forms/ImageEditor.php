@@ -17,20 +17,26 @@ For<?php
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
-    
+
 </head>
 <title>Index</title>
 <body>
-<h1 style="text-align: center;">Automated Map Cataloging</h1>
-<hr>
-<form action="../Scripts/ProcessImage.php" method="post" enctype="multipart/form-data">
-    Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload Image" name="submit">
-</form>
-
-<canvas id="canvasEdit" style="border:1px solid #000000;"></canvas>
-
+<div class="jumbotron">
+    <h1 style="text-align: center;">Automated Map Cataloging</h1>
+</div>
+<div class="container">
+    <!-- Image Uploading -->
+    <div class="row">
+        <form action="../Scripts/ProcessImage.php" method="post" enctype="multipart/form-data">
+            Select image to upload:
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <input type="submit" value="Upload Image" name="submit">
+        </form>
+    </div>
+    <div class="row">
+        <canvas id="canvasEdit" style="border:1px solid #000000;"></canvas>
+    </div>
+</div>
 </body>
 <script>
 
