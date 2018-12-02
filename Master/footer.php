@@ -36,9 +36,6 @@
                     <li>
                         <a href="../../Forms/Image_Editor/ImageEditor.php">Automated Map Cataloging</a>
                     </li>
-                    <li>
-                        <a href="#">Cataloging</a>
-                    </li>
                 </ul>
 
             </div>
@@ -49,16 +46,10 @@
                 <h5 class="text-uppercase">Links</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="">Scene Text Detection with Python</a>
+                        <a href="../../Forms/SceneTextDetection/">Scene Text Detection with Python</a>
                     </li>
                     <li>
-                        <a href="#!">Link 2</a>
-                    </li>
-                    <li>
-                        <a href="#!">Link 3</a>
-                    </li>
-                    <li>
-                        <a href="#!">Link 4</a>
+                        <a href="../../Forms/Catalog/">Cataloging</a>
                     </li>
                 </ul>
             </div>
