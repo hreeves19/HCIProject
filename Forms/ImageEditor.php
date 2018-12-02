@@ -1,4 +1,4 @@
-For<?php
+<?php
 /**
  * Created by PhpStorm.
  * User: Court
@@ -21,35 +21,145 @@ For<?php
 </head>
 <title>Index</title>
 <body>
-<div class="jumbotron">
-    <h1 style="text-align: center;">Automated Map Cataloging</h1>
+<div class="jumbotron" style="text-align: center;">
+    <h1>Automated Map Cataloging</h1>
+    <hr>
+    <h5>How to use this page</h5>
+    <p>Click inside of the canvas when you are reading to begin cropping!</p>
 </div>
-<div class="container">
+<div class="container-fluid" style="text-align: center;">
     <!-- Image Uploading -->
     <div class="row">
-        <form action="../Scripts/ProcessImage.php" method="post" enctype="multipart/form-data">
-            Select image to upload:
-            <input type="file" name="fileToUpload" id="fileToUpload">
-            <input type="submit" value="Upload Image" name="submit">
-        </form>
+        <div class="col-6">
+            <form action="../Scripts/ProcessImage.php" method="post" enctype="multipart/form-data">
+                <!--Select image to upload:
+                   <input type="file" name="fileToUpload" id="fileToUpload" class="btn btn-primary">
+                   <input type="button" value="Crop" id="btnCrop" onclick="cropClick()">
+                   <input type="submit" value="Upload Image" name="submit">-->
+                <div class="input-group">
+                    <input type="file" name="fileToUpload" id="fileToUpload">
+                    <input type="submit" value="Upload Image" name="submit">
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
+            <input type="button" value="Crop" id="btnCrop" class="btn btn-primary" onclick="cropClick()">
+        </div>
     </div>
+    <hr>
     <div class="row">
-        <canvas id="canvasEdit" style="border:1px solid #000000;"></canvas>
+        <div class="col">
+            <canvas id="canvasEdit" style="border:1px solid #000000;"></canvas>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <form id="imagesToUpload">
+                <h2>Images to be Uploaded</h2>
+                <br>
+            </form>
+        </div>
     </div>
 </div>
+<!-- Footer -->
+<footer class="page-footer font-small blue pt-4 bg-dark text-light">
+
+    <!-- Footer Links -->
+    <div class="container-fluid text-center text-md-left">
+
+        <!-- Grid row -->
+        <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-6 mt-md-0 mt-3">
+
+                <!-- Content -->
+                <h5 class="text-uppercase">Footer Content</h5>
+                <p>Here you can use rows and columns here to organize your footer content.</p>
+
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none pb-3">
+
+            <!-- Grid column -->
+            <div class="col-md-3 mb-md-0 mb-3">
+
+                <!-- Links -->
+                <h5 class="text-uppercase">Links</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#!">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 4</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 mb-md-0 mb-3">
+
+                <!-- Links -->
+                <h5 class="text-uppercase">Links</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#!">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 4</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2018 Copyright:
+        <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
 </body>
 <script>
-
-    /*************************************************************/
-    var canvas = document.getElementsByTagName('canvas')[0];
-    canvas.width = 800;
-    canvas.height = 600;
-
+    var numberOfImages = 0;
     var gkhead = new Image;
+    /*************************************************************/
+    $(document).ready(function() {
+       initialCanvas();
+    });
 
-    window.onload = function(){
-
+    function initialCanvas ()
+    {
+        var canvas = document.getElementsByTagName('canvas')[0];
         var ctx = canvas.getContext('2d');
+        canvas.width = 800;
+        canvas.height = 600;
+
         trackTransforms(ctx);
 
         function redraw(){
@@ -186,6 +296,48 @@ For<?php
         }
     }
 
+    function reset(){
+
+        // Clear the entire canvas
+        var p1 = ctx.transformedPoint(0,0);
+        var p2 = ctx.transformedPoint(canvas.width,canvas.height);
+        ctx.clearRect(p1.x,p1.y,p2.x-p1.x,p2.y-p1.y);
+
+        ctx.save();
+        ctx.setTransform(1,0,0,1,0,0);
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.restore();
+
+        ctx.drawImage(gkhead,0,0);
+
+    }
+
+    function cropClick()
+    {
+        // First thing, save the current canvas
+        var canvas = document.getElementById("canvasEdit");
+        var ctx = canvas.getContext("2d");
+
+        // Clip method
+        ctx.clip();
+        var img = canvas.toDataURL("image/png");
+
+        // We make an ajax call to save this to the server
+        $.ajax({
+            type: "POST",
+            url: "../Scripts/ManageImages.php",
+            data: {
+                imgBase64: img, numberOfImages: numberOfImages
+            },
+            success:function(data)
+            {
+                numberOfImages++;
+                console.log(data);
+                document.getElementById("imagesToUpload").innerHTML += data;
+                initialCanvas();
+            }
+        });
+    }
     /*************************************************************/
 
 </script>

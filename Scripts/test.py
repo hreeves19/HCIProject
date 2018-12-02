@@ -10,12 +10,12 @@ def main():
 
     # Load an color image in grayscale
     src = cv2.imread(filename_ext)
-    img = cv2.resize(src, (1000, 1000)) 
+    img = cv2.resize(src, (1000, 1000))
     vis = src.copy()
     new = ""
 
     # define the name of the directory to be created
-    path = "C:/xampp/htdocs/Hci_Project/Scripts/Images/" + str(filename)
+    path = "C:/xampp/htdocs/HciProject/Scripts/Images/" + str(filename)
 
     try:  
         os.mkdir(path)
@@ -24,6 +24,7 @@ def main():
     else:  
         print ("Successfully created the directory %s " % path)
 
+    #print(cv2.getBuildInformation())
     channels = cv2.text.computeNMChannels(src)
 
     # Looping through the channels
@@ -33,7 +34,7 @@ def main():
         erc2 = cv2.text.loadClassifierNM2("trained_classifierNM2.xml")
 
         # Creating ER Filters
-        er_filter1 = cv2.text.createERFilterNM1(erc1, 16, 0.00015, 0.13, 
+        er_filter1 = cv2.text.createERFilterNM1(erc1, 16, 0.00015, 0.13,
         0.2, True, 0.1)
 
         er_filter2 = cv2.text.createERFilterNM2(erc2, 0.5)
@@ -49,8 +50,8 @@ def main():
             rect = rects[r]
 
             # Drawing rectangles on vis
-            cv2.rectangle(vis, (rect[0],rect[1]), (rect[0]+rect[2],rect[1]+rect[3]), (0, 0, 0), 2)
-            cv2.rectangle(vis, (rect[0],rect[1]), (rect[0]+rect[2],rect[1]+rect[3]), (255, 255, 255), 1)
+            #cv2.rectangle(vis, (rect[0],rect[1]), (rect[0]+rect[2],rect[1]+rect[3]), (0, 0, 0), 2)
+            #cv2.rectangle(vis, (rect[0],rect[1]), (rect[0]+rect[2],rect[1]+rect[3]), (255, 255, 255), 1)
             
             # Cropping the image so it is just text
             roi = vis[rect[1]:rect[1]+rect[3], rect[0]:rect[0]+rect[2]]
