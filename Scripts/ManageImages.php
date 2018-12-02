@@ -24,6 +24,7 @@ if(isset($_POST["imgBase64"]) && isset($_POST["numberOfImages"]))
 
         $label = "<label for='select$counter'>$fileName</label>";
         $ddl = "<select class='form-control' id=\"select$counter\">
+      <option value='unknown'>Unknown Text</option>
       <option value='documentTitle'>Document Title</option>
       <option value='doucmentSubtitle'>Document Subtitle</option>
       <option value='mapScale'>Map Scale</option>
@@ -34,12 +35,29 @@ if(isset($_POST["imgBase64"]) && isset($_POST["numberOfImages"]))
         $button = "<button type=\"button\" class=\"btn btn-danger text-left\" onclick='deleteImg(\"$fileName\")'>Delete $fileName</button>";
 
         // Displaying cropped image to page
-        echo "<div class='form-group text-left col-6'>$label<div class='row'><div class='col'>$ddl</div><div class='col'>$button</div><br><br></div><img src='../Scripts/$fileName' id='$counter'></div>";
+        echo "<div class='form-group text-left' id='div$fileName'>$label<div class='row'><div class='col'>$ddl</div><div class='col'>$button</div><br><br></div><img src='../Scripts/$fileName' id='$counter'></div>";
     }
 
     else
     {
         echo "Sorry, image could not be saved.";
+    }
+}
+
+// Deleting image
+else if(isset($_POST["imgName"]))
+{
+    $image = $_POST["imgName"];
+
+    // Deleting file
+    if(!unlink(getcwd() . "\\" . $image))
+    {
+        echo false;
+    }
+
+    else
+    {
+        echo true;
     }
 }
 

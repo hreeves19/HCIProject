@@ -11,7 +11,7 @@
 <head>
     <script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-    <script src="../Scripts/CanvasEditor.js"></script>
+    <script src="../../Scripts/CanvasEditor.js"></script>
 
     <!-- Bootstrap CDN -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -19,146 +19,161 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
 
 </head>
-<title>Index</title>
+<title>Automated Map Cataloging</title>
 <body>
 <div class="jumbotron" style="text-align: center;">
     <h1>Automated Map Cataloging</h1>
     <hr>
     <h5>How to use this page</h5>
-    <p>Click inside of the canvas when you are reading to begin cropping!</p>
+    <p>Click inside of the canvas when you are ready to begin cropping! Press down on the left mouse button or the scroll wheel, then drag the mouse to move around the space (canvas)!</p>
+    <p>Additionally, you can use the mouse wheel to scroll in or out. Adjust the canvas size to get more accurate results! <strong>Pro Tip: </strong>You can have as many "Unknown" fields as possible, but only one for the rest!</p>
 </div>
 <div class="container-fluid" style="text-align: center;">
-    <!-- Image Uploading -->
     <div class="row">
-        <div class="col-6">
-            <form action="../Scripts/ProcessImage.php" method="post" enctype="multipart/form-data">
-                <!--Select image to upload:
-                   <input type="file" name="fileToUpload" id="fileToUpload" class="btn btn-primary">
-                   <input type="button" value="Crop" id="btnCrop" onclick="cropClick()">
-                   <input type="submit" value="Upload Image" name="submit">-->
+        <div class="col text-left">
+            <!-- Adjusting Canvas Size -->
+            <form id="formResize">
+                <h3>Adjust Canvas Size</h3>
+                <div class="form-group">
+                    <label for="canvasHeight">Height of Canvas</label>
+                    <input type="text" name="canvasHeight" id="canvasHeight" placeholder="Enter Canvas Height" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="canvasWidth">Width of Canvas</label>
+                    <input type="text" name="canvasWidth" id="canvasWidth" placeholder="Enter Canvas Width" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="canvasWeight">Weight of Scroll Wheel</label>
+                    <input type="text" name="canvasWeight" id="canvasWeight" placeholder="Enter Weight of the Scroll Wheel" class="form-control" required>
+                    <small id="weightHelp" class="form-text text-muted">The higher the weight, the more accurate the scroll wheel will be (zooming in function).</small>
+                </div>
+                <input type="button" class="btn btn-primary" value="Submit Changes" onclick="changeCanvasSize()">
+                <input type="button" class="btn btn-secondary" value="Reset Canvas" onclick="initialCanvas()";
+            </form>
+            <hr>
+            <!-- Change Canvas Image -->
+            <h3>Change Canvas Image</h3>
+            <form action="../../Scripts/ProcessImage.php" method="post" enctype="multipart/form-data">
                 <div class="input-group">
                     <input type="file" name="fileToUpload" id="fileToUpload">
-                    <input type="submit" value="Upload Image" name="submit">
+                    <!--<input type="submit" value="Upload Image" name="submit">-->
+                    <!--<input type="button" value="Change Image in Canvas" onclick="changeImage()">-->
                 </div>
             </form>
         </div>
-        <div class="col-6">
+        <div class="col">
+            <p><strong>Note: </strong> if the image isn't showing, make sure you click on the image or try to the "Reset Canvas" button!</p>
+            <canvas id="canvasEdit" style="border:1px solid #000000;"></canvas>
+            <br>
             <input type="button" value="Crop" id="btnCrop" class="btn btn-primary" onclick="cropClick()">
         </div>
     </div>
-    <hr>
     <div class="row">
-        <div class="col">
-            <canvas id="canvasEdit" style="border:1px solid #000000;"></canvas>
-        </div>
     </div>
     <hr>
     <div class="row">
         <div class="col">
             <form id="imagesToUpload">
                 <h2>Images to be Uploaded</h2>
+                <input type="button" class="btn btn-primary" value="Convert Images to Text" onclick="convertImageToText()">
+                <br>
                 <br>
             </form>
         </div>
     </div>
 </div>
-<!-- Footer -->
-<footer class="page-footer font-small blue pt-4 bg-dark text-light">
-
-    <!-- Footer Links -->
-    <div class="container-fluid text-center text-md-left">
-
-        <!-- Grid row -->
-        <div class="row">
-
-            <!-- Grid column -->
-            <div class="col-md-6 mt-md-0 mt-3">
-
-                <!-- Content -->
-                <h5 class="text-uppercase">Footer Content</h5>
-                <p>Here you can use rows and columns here to organize your footer content.</p>
-
-            </div>
-            <!-- Grid column -->
-
-            <hr class="clearfix w-100 d-md-none pb-3">
-
-            <!-- Grid column -->
-            <div class="col-md-3 mb-md-0 mb-3">
-
-                <!-- Links -->
-                <h5 class="text-uppercase">Links</h5>
-
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="#!">Link 1</a>
-                    </li>
-                    <li>
-                        <a href="#!">Link 2</a>
-                    </li>
-                    <li>
-                        <a href="#!">Link 3</a>
-                    </li>
-                    <li>
-                        <a href="#!">Link 4</a>
-                    </li>
-                </ul>
-
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-3 mb-md-0 mb-3">
-
-                <!-- Links -->
-                <h5 class="text-uppercase">Links</h5>
-
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="#!">Link 1</a>
-                    </li>
-                    <li>
-                        <a href="#!">Link 2</a>
-                    </li>
-                    <li>
-                        <a href="#!">Link 3</a>
-                    </li>
-                    <li>
-                        <a href="#!">Link 4</a>
-                    </li>
-                </ul>
-
-            </div>
-            <!-- Grid column -->
-
-        </div>
-        <!-- Grid row -->
-
-    </div>
-    <!-- Footer Links -->
-
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2018 Copyright:
-        <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
-    </div>
-    <!-- Copyright -->
-
-</footer>
+<?php include "../../Master/footer.php"; ?>
 </body>
 <script>
     var numberOfImages = 0;
     var gkhead = new Image;
+    var height;
+    var width;
+    var weight;
+    var imageName;
+    var lastX, lastY;
     /*************************************************************/
     $(document).ready(function() {
+
+        var imageLoader = document.getElementById('fileToUpload');
+        imageLoader.addEventListener('change', changeImage, false);
+
+        // Initializing variables
+        height = 600;
+        width = 800;
+        weight = 150;
+        imageName = 'image.jpg';
+        lastX = width/2;
+        lastY = height/2;
+
+        document.getElementById("canvasHeight").value = height;
+        document.getElementById("canvasWidth").value = width;
+        document.getElementById("canvasWeight").value = weight;
        initialCanvas();
     });
+
+    // Changing image
+    function changeImage(e)
+    {
+        // https://stackoverflow.com/questions/10906734/how-to-upload-image-into-html5-canvas
+        var reader = new FileReader();
+        reader.onload = function(event){
+            var img = new Image();
+            img.onload = function(){
+                //console.log(img);
+            }
+            img.src = event.target.result;
+            imageName = img.src;
+            initialCanvas();
+        }
+        reader.readAsDataURL(e.target.files[0]);
+    }
+
+    // Change Canvas Size
+    function changeCanvasSize()
+    {
+        var cWidth = document.getElementById("canvasWidth").value;
+        var cHeight = document.getElementById("canvasHeight").value;
+        var cWeight = document.getElementById("canvasWeight").value;
+
+        // Converting to integers
+        cWidth = parseInt(cWidth);
+        cHeight = parseInt(cHeight);
+        cWeight = parseInt(cWeight);
+
+        if(cWidth <= 0)
+        {
+            alert("Canvas width cannot be less than or equal to 0.");
+        }
+
+        else if(cHeight <= 0)
+        {
+            alert("Canvas height cannot be less than or equal to 0.");
+        }
+
+        else if(cWeight <= 0)
+        {
+            alert("Scroll Wheel Weight cannot be less than or equal to 0.");
+        }
+
+        else
+        {
+            height = cHeight;
+            width = cWidth;
+            weight = cWeight;
+            initialCanvas();
+        }
+    }
 
     function initialCanvas ()
     {
         var canvas = document.getElementsByTagName('canvas')[0];
         var ctx = canvas.getContext('2d');
-        canvas.width = 800;
-        canvas.height = 600;
+        //console.log(width);
+        //console.log(height);
+        canvas.width = width;
+        canvas.height = height;
+        gkhead.src = imageName;
 
         trackTransforms(ctx);
 
@@ -179,7 +194,8 @@
         }
         redraw();
 
-        var lastX=canvas.width/2, lastY=canvas.height/2;
+        //lastX = canvas.width/2;
+        //lastY = canvas.height/2;
 
         var dragStart,dragged;
 
@@ -211,7 +227,7 @@
 
         var zoom = function(clicks){
             var pt = ctx.transformedPoint(lastX,lastY);
-            console.log(gkhead.height);
+            //console.log(gkhead.height);
             ctx.translate(pt.x,pt.y);
             var factor = Math.pow(scaleFactor,clicks);
             ctx.scale(factor,factor);
@@ -220,7 +236,7 @@
         }
 
         var handleScroll = function(evt){
-            var delta = evt.wheelDelta ? evt.wheelDelta/40 : evt.detail ? -evt.detail : 0;
+            var delta = evt.wheelDelta ? evt.wheelDelta/weight : evt.detail ? -evt.detail : 0;
 
             if (delta) zoom(delta);
             return evt.preventDefault() && false;
@@ -230,7 +246,7 @@
         canvas.addEventListener('mousewheel',handleScroll,false);
     };
 
-    gkhead.src = 'image.jpg';
+    gkhead.src = imageName;
 
     // Adds ctx.getTransform() - returns an SVGMatrix
     // Adds ctx.transformedPoint(x,y) - returns an SVGPoint
@@ -332,7 +348,7 @@
             success:function(data)
             {
                 numberOfImages++;
-                console.log(data);
+                //console.log(data);
                 document.getElementById("imagesToUpload").innerHTML += data;
                 initialCanvas();
             }
@@ -340,5 +356,53 @@
     }
     /*************************************************************/
 
+    function convertImageToText()
+    {
+        var objectsFound = [];
+        // Looping through all selects and storing their values in an array
+        $("select").each(function(){
+            console.log($(this).val());
+            objectsFound.push($(this).val());
+        });
+
+        console.log(objectsFound);
+
+        // Making an ajax call to convert images
+        $.ajax({
+            type: "POST",
+            url: "../Scripts/ProcessImage.php",
+            data:{convertImages: true, objectsFound: objectsFound},
+            success:function(data)
+            {
+                console.log(data);
+            }
+        });
+    }
+
+    // Delete Image
+    function deleteImg(imgName)
+    {
+        $.ajax({
+            type: "POST",
+            url: "../Scripts/ManageImages.php",
+            data: {
+                imgName: imgName
+            },
+            success:function(data)
+            {
+                if(parseInt(data))
+                {
+                    //console.log("div" + imgName);
+                    document.getElementById("div" + imgName).outerHTML = "";
+                }
+
+                else
+                {
+                    alert("Could not delete image " + imgName);
+                }
+            }
+        });
+
+    }
 </script>
 </html>
