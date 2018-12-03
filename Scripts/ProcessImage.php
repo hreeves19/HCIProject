@@ -82,6 +82,45 @@ if(isset($_POST["submit"])) {
     }
 }
 
+else if(isset($_POST["image"]))
+{
+    $last_line = system('python test.py ' . $_POST["image"], $retval);
+
+    // Check if image was created
+
+    // Printing additional info
+    echo "<h1>Server Response</h1><hr>";
+
+    if($retval == 0)
+    {
+        // Getting the directory and cutting off the last four characters
+        $imgName = $_POST["image"];
+        $dir = "Images\\" . substr($imgName, 0, -4) . "\\";
+        $cw = getcwd();
+        $innerDir = substr($imgName, 0,-4);
+
+        // checking to make sure its a directory
+        if (is_dir($dir))
+        {
+            // If we can open it
+            if ($dh = opendir($dir))
+            {
+                while (($file = readdir($dh)) !== false)
+                {
+                    // Getting only image files
+                    if(preg_match("/jpg/", $file))
+                    {
+
+                        // push array
+                        echo "<h5 class='text-left'>$file</h5><div class='row'><img src='../../Scripts/Images/$innerDir/$file' class='border'></div>";
+                    }
+                }
+                closedir($dh);
+            }
+        }
+    }
+}
+
 else if(isset($_POST["convertImages"]) && isset($_POST["objectsFound"]))
 {
     // Opening up directory to get all the images

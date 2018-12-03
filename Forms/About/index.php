@@ -224,14 +224,67 @@
                     <li><strong>Instead of typing, click a button!</strong> If the cataloger finds the metadata they are looking for, it would be much faster to click a button than having to type it out.</li>
                     <li><strong>Rework Bandocat's user interface to a simple, but modern web page.</strong> You might be thinking "Can it really make that much of a difference?" Honestly, it can. Think about it, do you like coming home from the day to a clean home or a messy one?</li>
                 </ul>
-                <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
-                <ol>
-                    <li>Vestibulum id ligula porta felis euismod semper.</li>
-                    <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
-                    <li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
-                </ol>
-                <p>Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.</p>
+                <h3>The Results</h3>
+                <p>All in all, we have changed this project a couple times. In the beginning, we thought we were going to be running this website on a node.js server to run Tesseract.js. Afterwards, we thought we were going to write a console script using
+                    Scene Text Detection <a href="../SceneTextDetection/">(see our script in action here)</a> to crop our images and then give it to tesseract.js or a command prompt version of it. Oh, did I mention we were even going to use natural language processing to decide what the metadata was?</p>
+                <p>After many issues and struggling, we ended up with a much
+                 simpler solution. Have the user crop out the images in a canvas and let them choose what it is (in terms of metadata). Afterwards, upload these images to the server (XAMPP), run tesseract on each one. Create an array and assign the key as the value of what the text is supposed to be.
+                Last but not least, move the user to the cataloging page and fill out the fields as much as possible!</p>
+                <h3>Our Team</h3>
+                <h6>Laila Hall</h6>
+                <p>Undergraduate Research Assistant Developer at S{Q}L and Systems Programming Major at Texas A&M Corpus Christi</p>
+                <h6>Will Kelly</h6>
+                <p>Systems Programming Major at Texas A&M Corpus Christi</p>
+                <h6>Henry (Court) Reeves</h6>
+                <p>Undergraduate Research Assistant Developer at S{Q}L and Systems Programming Major at Texas A&M Corpus Christi</p>
+                <h3>Conclusion</h3>
+                <p>The project itself is not complete. In my opinion, the current state of it is not even an alpha build. In reality, what we created is a framework that will be built upon in the future by our team or programmers at S{Q}L. </p>
             </div><!-- /.blog-post -->
+            <!-- How to setup project -->
+            <div class="blog-post">
+                <h2 class="blog-post-title">Setting Up the Project</h2>
+                <p class="blog-post-meta">Watch this video to see how to setup the server and project files: <a href="https://www.youtube.com/watch?v=z886g6wzMpU&t=2s">XAMPP Installation Guide by Henry Reeves</a></p>
+                <h3>Links to Stuff You Will Need</h3>
+                <p><strong>I highly recommend that you use a computer that runs off of the Windows operating system.</strong> We cannot guarantee that any of this will work on another operating system.</p>
+                <ol>
+                    <li>
+                        <a href="https://www.apachefriends.org/download.html">XAMPP</a> which is our webserver (Only need to run the Apache server)
+                    </li>
+                    <li>
+                        <a href="https://github.com/UB-Mannheim/tesseract/wiki">Tesseract</a> I downloaded the 64 bit version
+                    </li>
+                </ol>
+                <h2>Getting Started</h2>
+                <p>At this point, you are only seeing this page for one of three reasons:</p>
+                <ol>
+                    <li>You have already installed XAMPP and are running a local Apache server</li>
+                    <li>We are hosting this on a website that is accessible via the internet</li>
+                    <li>You went into the project files and just ran this through a browser</li>
+                </ol>
+                <p>Either way, if its the first or third reason, I am here to help you out! By the way, I created a video for my software engineering class a while back that will show you how to install XAMPP and move the project files to the correct location.
+                 I did this because personally, I follow along must easier through watching a video of some kind. Anyways, lets make sure that everything is working properly so that you can run our project!</p>
+                <h2>Downloading and Running XAMPP</h2>
+                <p>Installing and running XAMPP is simple. First of all, click this link <a href="https://www.apachefriends.org/download.html">here</a> to download the version of XAMPP for you computer (I choose the very first option for Windows operating system).
+                 Install the software and then run the XAMPP control panel. Once its running, make sure you click "start" on the Apache server. It looks like this:</p>
+                <img src="xampp.JPG">
+                <p>Once the Apache server is running, move the project files to this directory: C:\xampp\htdocs. Your htdcos folder should look like this:</p>
+                <img src="directory.JPG">
+                <p><strong>Note:</strong> The Apache server must be running before you can open the website. Once it is running click <a href="http://localhost/HCIProject/Forms/About/">here</a> or copy and paste this link in your browser: http://localhost/HCIProject/Forms/About/</p>
+                <h2>Downloading and Installing Tesseract</h2>
+                <p>The next step to install all dependencies for our website is to download tesseract <a href="https://github.com/UB-Mannheim/tesseract/wiki">here</a>.
+                    I choose the 64 bit version, download and run the executable.</p>
+                <p><strong>Note:</strong> Make sure you select the option to allow all users access too it. When you are done following the installer, please make sure it is saved under this directory: C:\Program Files (x86)\Tesseract-OCR.
+                 It should look like this whenever you are done: </p>
+                <img src="tesseract_dir.JPG">
+                <p>After you have made sure that it is saved in the correct directory, you can finally go to the <a href="../Image_Editor/ImageEditor.php">Image Editor</a>. However, if you want to run the python script that uses scene detection, there is still more to do below!</p>
+                <h2>Downloading and Installing OpenCV Libraries for Python</h2>
+                <ol>
+                    <li>Open up Windows Command Prompt</li>
+                    <li>Copy and paste this command and then run it: install opencv-python</li>
+                    <li>Wait for the command to finish running (it shoudl be downloading stuff). Once its done, copy and paste this command and then run it: install opencv-contrib-python</li>
+                </ol>
+                <p>Once that is finished, you should now be able to run our Scene Text Detection script <a href="../SceneTextDetection/index.php">here</a>.</p>
+            </div>
         </div>
         <!-- About -->
         <div class="col-sm-3 offset-sm-1 blog-sidebar">
@@ -244,6 +297,14 @@
         </div>
     </div> <!-- Row -->
 </div>
+<footer class="blog-footer text-center">
+    <p>Please email me if you are having issues running our project at <strong>hreeves@islander.tamucc.edu</strong></p>
+    <p>Styling for our website powered by <a href="https://getbootstrap.com">Bootstrap</a>.</p>
+    <p>
+        <a href="#">Back to top</a>
+    </p>
+    <p><a href="../Image_Editor/ImageEditor.php">Back to Image Editor</a></p>
+</footer>
 </body>
 </html>
 
