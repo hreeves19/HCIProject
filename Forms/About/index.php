@@ -172,7 +172,7 @@
         }
     </style>
 </head>
-<title>Automated Map Cataloging</title>
+<title>Our Story</title>
 <body>
 <div class="blog-header">
     <div class="container">
@@ -230,15 +230,16 @@
                 <p>After many issues and struggling, we ended up with a much
                  simpler solution. Have the user crop out the images in a canvas and let them choose what it is (in terms of metadata). Afterwards, upload these images to the server (XAMPP), run tesseract on each one. Create an array and assign the key as the value of what the text is supposed to be.
                 Last but not least, move the user to the cataloging page and fill out the fields as much as possible!</p>
+                <h3>Conclusion</h3>
+                <p>The project itself is not complete. In my opinion, the current state of it is not even an alpha build. In reality, what we created is a framework that will be built upon in the future by our team or programmers at S{Q}L. </p>
                 <h3>Our Team</h3>
                 <h6>Laila Hall</h6>
                 <p>Undergraduate Research Assistant Developer at S{Q}L and Systems Programming Major at Texas A&M Corpus Christi</p>
                 <h6>Will Kelly</h6>
-                <p>Systems Programming Major at Texas A&M Corpus Christi</p>
+                <p>Information Systems Major at Texas A&M Corpus Christi</p>
                 <h6>Henry (Court) Reeves</h6>
                 <p>Undergraduate Research Assistant Developer at S{Q}L and Systems Programming Major at Texas A&M Corpus Christi</p>
-                <h3>Conclusion</h3>
-                <p>The project itself is not complete. In my opinion, the current state of it is not even an alpha build. In reality, what we created is a framework that will be built upon in the future by our team or programmers at S{Q}L. </p>
+
             </div><!-- /.blog-post -->
             <!-- How to setup project -->
             <div class="blog-post">
@@ -278,12 +279,24 @@
                 <img src="tesseract_dir.JPG">
                 <p>After you have made sure that it is saved in the correct directory, you can finally go to the <a href="../Image_Editor/ImageEditor.php">Image Editor</a>. However, if you want to run the python script that uses scene detection, there is still more to do below!</p>
                 <h2>Downloading and Installing OpenCV Libraries for Python</h2>
+                <p>So there are two parts that we need to check here. First, we need to check to make sure your machine has python installed. Secondly, we need to make sure you have installed
+                the opencv libraries for python that we use.</p>
+                <p>To check to see if python is installed, open up command prompt and run this command (MAC is <strong>python -v</strong>): <strong>python</strong>. After running the command,
+                 if the prompt reports a version of your python, you are good to go! Otherwise, we need to have you install python. Please refer to the list below to install python on a windows machine:</p>
+                <ol>
+                    <li>Click on this link <a href="https://www.python.org/downloads/windows/">here</a> to navigate to the page where you can install python</li>
+                    <li>Once you are on the page with the downloads, I recommend selecting a web installer (just get the latest version). Should say something like: <strong>Download Windows x86 web-based installer</strong></li>
+                    <li>Click the link they have provided, once the installer starts, make sure you select the option to add it to your environment variables</li>
+                    <li>Once it's done, open up Windows command prompt and run the command <strong>python</strong>. It should now show your python version, and now hit the key strokes <strong>ctrl+z then enter</strong> to stop python</li>
+                </ol>
+                <p>In this next section, lets run these commands to make sure your python has the libraries we are using.</p>
                 <ol>
                     <li>Open up Windows Command Prompt</li>
-                    <li>Copy and paste this command and then run it: install opencv-python</li>
-                    <li>Wait for the command to finish running (it shoudl be downloading stuff). Once its done, copy and paste this command and then run it: install opencv-contrib-python</li>
+                    <li>Copy and paste this command and then run it: <strong>pip install opencv-python</strong></li>
+                    <li>Wait for the command to finish running (it should be downloading stuff)</li>
+                    <li>Once its done, copy and paste this command and then run it: <strong>pip install opencv-contrib-python</strong></li>
                 </ol>
-                <p>Once that is finished, you should now be able to run our Scene Text Detection script <a href="../SceneTextDetection/index.php">here</a>.</p>
+                <p>Once you have completed the steps above, please restart the servers you are running on XAMPP (or restart your computer). Once that is done, you should now be able to run our Scene Text Detection script <a href="../SceneTextDetection/index.php">here</a>.</p>
             </div>
         </div>
         <!-- About -->

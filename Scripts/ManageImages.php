@@ -26,7 +26,7 @@ if(isset($_POST["imgBase64"]) && isset($_POST["numberOfImages"]))
         $ddl = "<select class='form-control' id=\"select$counter\">
       <option value='unknown'>Unknown Text</option>
       <option value='documentTitle'>Document Title</option>
-      <option value='doucmentSubtitle'>Document Subtitle</option>
+      <option value='subTitle'>Document Subtitle</option>
       <option value='mapScale'>Map Scale</option>
       <option value='authorName'>Author Name</option>
       <option value='companyName'>Company Name</option>
@@ -35,7 +35,7 @@ if(isset($_POST["imgBase64"]) && isset($_POST["numberOfImages"]))
         $button = "<button type=\"button\" class=\"btn btn-danger text-left\" onclick='deleteImg(\"$fileName\")'>Delete $fileName</button>";
 
         // Displaying cropped image to page
-        echo "<div class='form-group text-left' id='div$fileName'>$label<div class='row'><div class='col'>$ddl</div><div class='col'>$button</div><br><br></div><img src='../Scripts/$fileName' id='$counter'></div>";
+        echo "<div class='form-group text-left' id='div$fileName'>$label<div class='row'><div class='col'>$ddl</div><div class='col'>$button</div><br><br></div><img src='../../Scripts/$fileName' id='$counter'></div>";
     }
 
     else

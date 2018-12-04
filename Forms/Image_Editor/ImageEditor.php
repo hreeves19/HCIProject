@@ -18,9 +18,23 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
 
+    <style>
+        .cropArea {
+            background: #E4E4E4;
+            overflow: hidden;
+            width:500px;
+            height:350px;
+        }
+
+        .cropped {
+            width: 700px;
+        }
+    </style>
+
 </head>
 <title>Automated Map Cataloging</title>
 <body>
+<?php include("../../Master/navbar.php") ?>
 <div class="jumbotron" style="text-align: center;">
     <h1>Automated Map Cataloging</h1>
     <hr>
@@ -165,6 +179,7 @@
         }
     }
 
+    /*****************************************https://codepen.io/techslides/pen/zowLd*****************************************/
     function initialCanvas ()
     {
         var canvas = document.getElementsByTagName('canvas')[0];
@@ -327,6 +342,8 @@
         ctx.drawImage(gkhead,0,0);
 
     }
+    /*****************************************Stops here*****************************************/
+
 
     function cropClick()
     {
@@ -341,7 +358,7 @@
         // We make an ajax call to save this to the server
         $.ajax({
             type: "POST",
-            url: "../Scripts/ManageImages.php",
+            url: "../../Scripts/ManageImages.php",
             data: {
                 imgBase64: img, numberOfImages: numberOfImages
             },
@@ -354,7 +371,6 @@
             }
         });
     }
-    /*************************************************************/
 
     function convertImageToText()
     {
@@ -370,11 +386,14 @@
         // Making an ajax call to convert images
         $.ajax({
             type: "POST",
-            url: "../Scripts/ProcessImage.php",
+            url: "../../Scripts/ProcessImage.php",
             data:{convertImages: true, objectsFound: objectsFound},
             success:function(data)
             {
-                console.log(data);
+                console.log(JSON.parse(data));
+                var obj = JSON.parse(data);
+
+                window.location.href = "http://localhost/HCIProject/Forms/Catalog/index.php";
             }
         });
     }
@@ -384,7 +403,7 @@
     {
         $.ajax({
             type: "POST",
-            url: "../Scripts/ManageImages.php",
+            url: "../../Scripts/ManageImages.php",
             data: {
                 imgName: imgName
             },

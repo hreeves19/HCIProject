@@ -21,6 +21,7 @@
 </head>
 <title>Scene Text Detection</title>
 <body>
+<?php include("../../Master/navbar.php") ?>
 <div class="jumbotron" style="text-align: center;">
     <h1>Scene Text Detection</h1>
     <hr>

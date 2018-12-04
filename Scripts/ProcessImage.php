@@ -84,7 +84,9 @@ if(isset($_POST["submit"])) {
 
 else if(isset($_POST["image"]))
 {
-    $last_line = system('python test.py ' . $_POST["image"], $retval);
+    $cmd = "python " . getcwd() . "\\test.py " . $_POST["image"];
+    //$cmd = "ls";
+    $last_line = system($cmd, $retval);
 
     // Check if image was created
 
@@ -110,7 +112,6 @@ else if(isset($_POST["image"]))
                     // Getting only image files
                     if(preg_match("/jpg/", $file))
                     {
-
                         // push array
                         echo "<h5 class='text-left'>$file</h5><div class='row'><img src='../../Scripts/Images/$innerDir/$file' class='border'></div>";
                     }
@@ -118,6 +119,13 @@ else if(isset($_POST["image"]))
                 closedir($dh);
             }
         }
+    }
+
+    else
+    {
+        echo "<h5>" . getcwd() . "</h5><br>";
+        echo "<h5>Something went wrong: " . exec($cmd) . "</h5><br>";
+        echo "<h5>Command used: $cmd";
     }
 }
 
@@ -168,8 +176,9 @@ else if(isset($_POST["convertImages"]) && isset($_POST["objectsFound"]))
 
             else
             {
+                $counter = 0;
                 // Looping through each image
-                for($i = 0; $i < count($imageNames); $i++)
+                for($i = 0; $i < count($objects); $i++)
                 {
                     // Getting full path to image
                     $fullPathToImage = $dir . "\\" . "$imageNames[$i]";
@@ -183,18 +192,26 @@ else if(isset($_POST["convertImages"]) && isset($_POST["objectsFound"]))
                         // Adding iterator to name to keep each unique, so user can upload many versions of unknowns
                         if($objects[$i] == "unknown")
                         {
-                            $results[$objects[$i] . $i] = $answer;
+                            // Filter Answer
+                            $answer = trim(preg_replace('/\s\s+/', ' ', $answer));
+                            $results[$objects[$counter] . $i] = $answer;
                         }
 
                         // This else statement forces only one type of all other objects except unknowns
                         else
                         {
-                            $results[$objects[$i]] = $answer;
+                            // Filter answer
+                            $answer = trim(preg_replace('/\s\s+/', ' ', $answer));
+                            $results[$objects[$counter]] = $answer;
                         }
+                        $counter++;
                     }
                 }
 
-                var_dump($results);
+                echo json_encode($results);
+                session_start();
+                session_unset(); // Resetting session variables
+                $_SESSION["object"] = $results;
             } // change directory else
         } // If images were found
 
